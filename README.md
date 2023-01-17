@@ -1,2 +1,2 @@
 # QuadraticFunction_AA
-This is a program that draws quadratic functions with Anti-Aliasing
+This is a program that draws quadratic functions with Anti-Aliasing. Also, dont be surprised to see that the code is not on the gratest level as I'm still a begginer...

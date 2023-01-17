@@ -43,14 +43,6 @@ int main() {
 			if (event.type == SDL_QUIT) {
 			return 0;
 			}
-			if(event.type == SDL_MOUSEWHEEL) {
-				if(event.wheel.y > 0) {
-					CMax -= 2;
-				}
-				else if(event.wheel.y < 0) {
-					CMax += 2;
-				}
-        		}
 		}
 
 		SDL_RenderClear(s);

@@ -121,7 +121,6 @@ int main() {
 					}
 				}
 			}
-
 		}
 
 		SDL_RenderPresent(s);

@@ -31,7 +31,7 @@ int main() {
 	float Hwidth = (float)width / 2;
 	float CMax = 10;
 
-	float a1 = 1;
+	float a = 1;
 	float b = 1.23;
 	float c = (float)0.12103;
 	while (1) {
@@ -51,7 +51,6 @@ int main() {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 255);
 			SDL_RenderDrawPoint(s, width / 2, i);
 			SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
-			
 			if (i % (int)(Hheight / CMax) == 0) {
 				for (int a = 0; a < 5; a++) {
 					SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -65,7 +64,6 @@ int main() {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderDrawPoint(s, i, Hheight);
 			SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
-			
 			if (i % (int)(Hwidth / CMax) == 0) {
 				for (int a = 0; a < 5; a++) {
 					SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -74,28 +72,27 @@ int main() {
 				}
 			}
 		}
-		
 		for (int i = -Hwidth; i < Hwidth; i++) {
-			float actualh = getY(i, Hwidth, c, CMax, b, a1);
-			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a1);
-			float subrealh = getY(i - 1, Hwidth, c, CMax, b, a1);
-			for (int a = -Hheight; a < Hheight; a++) {
-				float nactualh = (((float)CMax / Hheight) * a);
-				float addnrealh = (((float)CMax / Hheight) * (a + 1));
-				float subnreal = (((float)CMax / Hheight) * (a - 1));
+			float actualh = getY(i, Hwidth, c, CMax, b, a);
+			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a);
+			float subrealh = getY(i - 1, Hwidth, c, CMax, b, a);
+			for (int y = -Hheight; y < Hheight; y++) {
+				float nactualh = (((float)CMax / Hheight) * y);
+				float addnrealh = (((float)CMax / Hheight) * (y + 1));
+				float subnreal = (((float)CMax / Hheight) * (y - 1));
 
 				if ((fabsf(actualh - nactualh) < fabsf(actualh - subnreal) && fabsf(actualh - nactualh) < fabs(actualh - addnrealh)) || (fabsf(nactualh - actualh) < fabsf(nactualh - subrealh) && fabsf(nactualh - actualh) < fabsf(nactualh - addrealh))) {
 					if ((addrealh > actualh && actualh < subrealh) || (addrealh < actualh && actualh > subrealh)) {
 						if (fabsf(nactualh - actualh) < fabsf(subnreal - actualh) && fabsf(nactualh - actualh) < fabs(addnrealh - actualh)) {
-							graph[i + (int)Hwidth][a + (int)Hheight] = 1;
+							graph[i + (int)Hwidth][y + (int)Hheight] = 1;
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
-							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - a);
+							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - y);
 							SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
 						}
 					} else {
-						graph[i + (int)Hwidth][a + (int)Hheight] = 1;
+						graph[i + (int)Hwidth][y + (int)Hheight] = 1;
 						SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
-						SDL_RenderDrawPoint(s, i + Hwidth, Hheight - a);
+						SDL_RenderDrawPoint(s, i + Hwidth, Hheight - y);
 						SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
 					}
 				}
@@ -104,31 +101,31 @@ int main() {
 
 		for (int c = 0; c < 4; c++) {
 			for (int i = 1; i < width; i++) {
-				for (int a = 1; a < height; a++) {
-					if (graph[i][a] != 1) {
+				for (int j = 1; j < height; j++) {
+					if (graph[i][j] != 1) {
 						float fade;
-						fade = (float)(graph[i + 1][a] + graph[i - 1][a] + graph[i][a + 1] + graph[i][a - 1]) / 4;
+						fade = (float)(graph[i + 1][j] + graph[i - 1][j] + graph[i][j + 1] + graph[i][j - 1]) / 4;
 						if (fade > 0.2) {
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, fade * 100);
-							SDL_RenderDrawPoint(s, i, height - a);
+							SDL_RenderDrawPoint(s, i, height - j);
 							SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
 						}
-						graph[i][a] = fade;
+						graph[i][j] = fade;
 					}
 				}
 			}
 
-			for (int a = 1; a < height; a++) {
+			for (int j = 1; j < height; j++) {
 				for (int i = width - 1; i >= 1; i--) {
-					if (graph[i][a] != 1) {
+					if (graph[i][j] != 1) {
 						float fade;
-						fade = (float)(graph[i + 1][a] + graph[i - 1][a] + graph[i][a + 1] + graph[i][a - 1]) / 4;
+						fade = (float)(graph[i + 1][j] + graph[i - 1][j] + graph[i][j + 1] + graph[i][j - 1]) / 4;
 						if (fade > 0.2) {
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, fade * 100);
-							SDL_RenderDrawPoint(s, i, height - a);
+							SDL_RenderDrawPoint(s, i, height - j);
 							SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
 						}
-						graph[i][a] = fade;
+						graph[i][j] = fade;
 					}
 				}
 			}

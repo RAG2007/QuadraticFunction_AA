@@ -45,7 +45,7 @@ int main() {
 		}
 
 		SDL_RenderClear(s);
-		for(int i = 0; i <= width; i++) {
+		for (int i = 0; i <= width; i++) {
 			for (int a = 0; a <= height; a++) {
 				graph[i][a] = 0;
 			}
@@ -93,7 +93,7 @@ int main() {
 				}
 			}
 		}
-		for(int c = 0; c < 4; c++) {
+		for (int c = 0; c < 4; c++) {
 			for(int i = 1; i < width; i++) {
 				for (int a = 1; a < height; a++) {
 					if(graph[i][a] != 1) {
@@ -108,7 +108,7 @@ int main() {
 					}
 				}
 			}
-			for(int a = 1; a < height; a++) {
+			for (int a = 1; a < height; a++) {
 				for (int i = width - 1; i >= 1; i--) {
 					if(graph[i][a] != 1) {
 						float fade;

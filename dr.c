@@ -25,14 +25,14 @@ int main() {
 	SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawBlendMode(s, SDL_BLENDMODE_BLEND);
 
-	float graph[width + 1][height + 1];
-	float Hheight = (float)height / 2;
-	float Hwidth = (float)width / 2;
-	float CMax = 10;
+	float graph[width + 1][height + 1],
+	      Hheight = (float)height / 2,
+	      Hwidth = (float)width / 2,
+	      CMax = 10;
 
-	float a = 1;
-	float b = 1.23;
-	float c = (float)0.12103;
+	float a = 1,
+	      b = 1.23,
+	      c = (float)0.12103;
 	while (1) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
@@ -72,17 +72,22 @@ int main() {
 			}
 		}
 		for (int i = -Hwidth; i < Hwidth; i++) {
-			float actualh = getY(i, Hwidth, c, CMax, b, a);
-			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a);
-			float subrealh = getY(i - 1, Hwidth, c, CMax, b, a);
+			float actualh = getY(i, Hwidth, c, CMax, b, a),
+			      addrealh = getY(i + 1, Hwidth, c, CMax, b, a),
+			      subrealh = getY(i - 1, Hwidth, c, CMax, b, a);
 			for (int y = -Hheight; y < Hheight; y++) {
-				float nactualh = (((float)CMax / Hheight) * y);
-				float addnrealh = (((float)CMax / Hheight) * (y + 1));
-				float subnreal = (((float)CMax / Hheight) * (y - 1));
+				float nactualh = (((float)CMax / Hheight) * y),
+				      addnrealh = (((float)CMax / Hheight) * (y + 1)),
+				      subnrealh = (((float)CMax / Hheight) * (y - 1)),
+				      ahna = fabsf(actualh - nactualh),
+				      ahanrh = fabs(actualh - addnrealh),
+				      ahsnrh = fabsf(actualh - subnrealh),
+				      nahsh = fabsf(nactualh - subrealh),
+				      naharh = fabsf(nactualh - addrealh);
 
-				if ((fabsf(actualh - nactualh) < fabsf(actualh - subnreal) && fabsf(actualh - nactualh) < fabs(actualh - addnrealh)) || (fabsf(nactualh - actualh) < fabsf(nactualh - subrealh) && fabsf(nactualh - actualh) < fabsf(nactualh - addrealh))) {
+				if ((ahna < ahsnrh && ahna < ahanrh) || (ahna < nahsh && ahna < naharh)) {
 					if ((addrealh > actualh && actualh < subrealh) || (addrealh < actualh && actualh > subrealh)) {
-						if (fabsf(nactualh - actualh) < fabsf(subnreal - actualh) && fabsf(nactualh - actualh) < fabs(addnrealh - actualh)) {
+						if (ahna < ahsnrh && ahna < ahanrh) {
 							graph[i + (int)Hwidth][y + (int)Hheight] = 1;
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
 							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - y);

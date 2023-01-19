@@ -3,5 +3,5 @@ This is a program that draws quadratic functions with Anti-Aliasing. Also, dont 
 
 To use program:
 1. Install all dependencies like, SDL2 library for c language.
-2. Change "a", "b" and "c" variables as you like(with notation a*x^2 + b*x + c).
+2. Change "a", "b" and "c" variables as you like (with notation a*x^2 + b*x + c).
 3. have fun looking at beautiful functions in range to 10!

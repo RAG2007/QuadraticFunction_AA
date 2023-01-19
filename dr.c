@@ -81,9 +81,9 @@ int main() {
 				float addnrealh = (((float)CMax / Hheight) * (a + 1));
 				float subnreal = (((float)CMax / Hheight) * (a - 1));
 
-				if (fabsf(subnreal - actualh) < fabsf(subnreal - actualh) && fabsf(subnreal - actualh) < fabs(subnreal - actualh) || fabsf(subnreal - actualh) < fabsf(subnreal - subrealh) && fabsf(subnreal - actualh) < fabsf(subnreal - addrealh)) {
+				if ((fabsf(nactualh - actualh) < fabsf(subnreal - actualh) && fabsf(nactualh - actualh) < fabs(addnrealh - actualh)) || (fabsf(nactualh - actualh) < fabsf(nactualh - subrealh) && fabsf(nactualh - actualh) < fabsf(nactualh - addrealh))) {
 					if (addrealh > actualh && actualh < subrealh || addrealh < actualh && actualh > subrealh) {
-						if (fabsf(subnreal - actualh) < fabsf(subnreal - actualh) && fabsf(subnreal - actualh) < fabs(subnreal - actualh)) {
+						if (fabsf(nactualh - actualh) < fabsf(subnreal - actualh) && fabsf(nactualh - actualh) < fabs(addnrealh - actualh)) {
 							graph[i + (int)Hwidth][a + (int)Hheight] = 1;
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
 							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - a);

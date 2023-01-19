@@ -107,6 +107,7 @@ int main() {
 					}
 				}
 			}
+			
 			for (int a = 1; a < height; a++) {
 				for (int i = width - 1; i >= 1; i--) {
 					if (graph[i][a] != 1) {

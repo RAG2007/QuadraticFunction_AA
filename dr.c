@@ -10,24 +10,21 @@
 #include <math.h>
 #include <stdlib.h>
 
-void first() {
-
-}
 float getY(int f, int xd, float p, int Cma, float k, float l) {
 	float h;
-	h = l * pow(((float)Cma / xd) * f, 2) + (((float)Cma / xd)* f) * k + p;
+	h = l * pow(((float)Cma / xd) * f, 2) + (((float)Cma / xd) * f) * k + p;
 	return h;
 }
-
-
 
 int main() {
 	int height = 800;
 	int width = 800;
+
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Window *window = SDL_CreateWindow("Quadratic Functions", 100, 100, width, height, SDL_WINDOW_SHOWN);
 	SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawBlendMode(s, SDL_BLENDMODE_BLEND);
+
 	float graph[width + 1][height + 1];
 	float Hheight = (float)height / 2;
 	float Hwidth = (float)width / 2;
@@ -39,17 +36,16 @@ int main() {
 	while (1) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-			return 0;
-			}
+			if (event.type == SDL_QUIT)
+				return 0;
 		}
 
 		SDL_RenderClear(s);
 		for (int i = 0; i <= width; i++) {
-			for (int a = 0; a <= height; a++) {
+			for (int a = 0; a <= height; a++)
 				graph[i][a] = 0;
-			}
 		}
+
 		for (int i = 0; i < height; i++) {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 255);
 			SDL_RenderDrawPoint(s, width / 2, i);
@@ -62,6 +58,7 @@ int main() {
 				}
 			}
 		}
+
 		for (int i = 0; i < width; i++) {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderDrawPoint(s, i, Hheight);
@@ -74,6 +71,7 @@ int main() {
 				}
 			}
 		}
+
 		for (int i = -Hwidth; i < Hwidth; i++) {
 			for (int a = -Hheight; a < Hheight; a++) {
 				if (fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1)) || fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i - 1, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i + 1, Hwidth, c, CMax, b, a1))) {
@@ -93,6 +91,7 @@ int main() {
 				}
 			}
 		}
+
 		for (int c = 0; c < 4; c++) {
 			for (int i = 1; i < width; i++) {
 				for (int a = 1; a < height; a++) {
@@ -124,6 +123,7 @@ int main() {
 			}
 
 		}
+
 		SDL_RenderPresent(s);
 	}
 }

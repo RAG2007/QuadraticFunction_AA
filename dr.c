@@ -15,6 +15,7 @@ float getY(int f, int xd, float p, int Cma, float k, float l) {
 	h = l * pow(((float)Cma / xd) * f, 2) + (((float)Cma / xd) * f) * k + p;
 	return h;
 }
+#define RightY(v) getY(i + v, Hwidth, c, CMax, b, a1);
 
 int main() {
 	int height = 800;
@@ -71,12 +72,18 @@ int main() {
 				}
 			}
 		}
-
 		for (int i = -Hwidth; i < Hwidth; i++) {
+			float actualh = getY(i, Hwidth, c, CMax, b, a1);
+			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a1);
+			float subrealh = getY(i - 1, Hwidth, c, CMax, b, a1);
 			for (int a = -Hheight; a < Hheight; a++) {
-				if (fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1)) || fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i - 1, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i + 1, Hwidth, c, CMax, b, a1))) {
-					if (getY(i + 1, Hwidth, c, CMax, b, a1) > getY(i, Hwidth, c, CMax, b, a1) && getY(i, Hwidth, c, CMax, b, a1) < getY(i - 1, Hwidth, c, CMax, b, a1) || getY(i + 1, Hwidth, c, CMax, b, a1) < getY(i, Hwidth, c, CMax, b, a1) && getY(i, Hwidth, c, CMax, b, a1) > getY(i - 1, Hwidth, c, CMax, b, a1)) {
-						if (fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1))) {
+				float nactualh = (((float)CMax / Hheight) * a);
+				float addnrealh = (((float)CMax / Hheight) * (a + 1));
+				float subnreal = (((float)CMax / Hheight) * (a - 1));
+
+				if (fabsf(subnreal - actualh) < fabsf(subnreal - actualh) && fabsf(subnreal - actualh) < fabs(subnreal - actualh) || fabsf(subnreal - actualh) < fabsf(subnreal - subrealh) && fabsf(subnreal - actualh) < fabsf(subnreal - addrealh)) {
+					if (addrealh > actualh && actualh < subrealh || addrealh < actualh && actualh > subrealh) {
+						if (fabsf(subnreal - actualh) < fabsf(subnreal - actualh) && fabsf(subnreal - actualh) < fabs(subnreal - actualh)) {
 							graph[i + (int)Hwidth][a + (int)Hheight] = 1;
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
 							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - a);
@@ -107,7 +114,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			for (int a = 1; a < height; a++) {
 				for (int i = width - 1; i >= 1; i--) {
 					if (graph[i][a] != 1) {

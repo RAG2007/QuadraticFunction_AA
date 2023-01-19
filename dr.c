@@ -51,6 +51,7 @@ int main() {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 255);
 			SDL_RenderDrawPoint(s, width / 2, i);
 			SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
+			
 			if (i % (int)(Hheight / CMax) == 0) {
 				for (int a = 0; a < 5; a++) {
 					SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -64,6 +65,7 @@ int main() {
 			SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderDrawPoint(s, i, Hheight);
 			SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
+			
 			if (i % (int)(Hwidth / CMax) == 0) {
 				for (int a = 0; a < 5; a++) {
 					SDL_SetRenderDrawColor(s, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -72,6 +74,7 @@ int main() {
 				}
 			}
 		}
+		
 		for (int i = -Hwidth; i < Hwidth; i++) {
 			float actualh = getY(i, Hwidth, c, CMax, b, a1);
 			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a1);

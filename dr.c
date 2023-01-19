@@ -76,9 +76,9 @@ int main() {
 		}
 		for (int i = -Hwidth; i < Hwidth; i++) {
 			for (int a = -Hheight; a < Hheight; a++) {
-				if(fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1)) || fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i - 1, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i + 1, Hwidth, c, CMax, b, a1))) {
+				if (fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1)) || fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i - 1, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * a) - getY(i + 1, Hwidth, c, CMax, b, a1))) {
 					if (getY(i + 1, Hwidth, c, CMax, b, a1) > getY(i, Hwidth, c, CMax, b, a1) && getY(i, Hwidth, c, CMax, b, a1) < getY(i - 1, Hwidth, c, CMax, b, a1) || getY(i + 1, Hwidth, c, CMax, b, a1) < getY(i, Hwidth, c, CMax, b, a1) && getY(i, Hwidth, c, CMax, b, a1) > getY(i - 1, Hwidth, c, CMax, b, a1)) {
-						if(fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1))) {
+						if (fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabsf((((float)CMax / Hheight) * (a - 1)) - getY(i, Hwidth, c, CMax, b, a1)) && fabsf((((float)CMax / Hheight) * a) - getY(i, Hwidth, c, CMax, b, a1)) < fabs((((float)CMax / Hheight) * (a + 1)) - getY(i, Hwidth, c, CMax, b, a1))) {
 							graph[i + (int)Hwidth][a + (int)Hheight] = 1;
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, 0xFF);
 							SDL_RenderDrawPoint(s, i + Hwidth, Hheight - a);
@@ -94,12 +94,12 @@ int main() {
 			}
 		}
 		for (int c = 0; c < 4; c++) {
-			for(int i = 1; i < width; i++) {
+			for (int i = 1; i < width; i++) {
 				for (int a = 1; a < height; a++) {
-					if(graph[i][a] != 1) {
+					if (graph[i][a] != 1) {
 						float fade;
 						fade = (float)(graph[i + 1][a] + graph[i - 1][a] + graph[i][a + 1] + graph[i][a - 1]) / 4;
-						if(fade > 0.2) {
+						if (fade > 0.2) {
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, fade * 100);
 							SDL_RenderDrawPoint(s, i, height - a);
 							SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);
@@ -110,10 +110,10 @@ int main() {
 			}
 			for (int a = 1; a < height; a++) {
 				for (int i = width - 1; i >= 1; i--) {
-					if(graph[i][a] != 1) {
+					if (graph[i][a] != 1) {
 						float fade;
 						fade = (float)(graph[i + 1][a] + graph[i - 1][a] + graph[i][a + 1] + graph[i][a - 1]) / 4;
-						if(fade > 0.2) {
+						if (fade > 0.2) {
 							SDL_SetRenderDrawColor(s, 0x59, 0x5f, 0xFF, fade * 100);
 							SDL_RenderDrawPoint(s, i, height - a);
 							SDL_SetRenderDrawColor(s, 0x00, 0x00, 0x00, 0xFF);

@@ -15,7 +15,6 @@ float getY(int f, int xd, float p, int Cma, float k, float l) {
 	h = l * pow(((float)Cma / xd) * f, 2) + (((float)Cma / xd) * f) * k + p;
 	return h;
 }
-#define RightY(v) getY(i + v, Hwidth, c, CMax, b, a1);
 
 int main() {
 	int height = 800;

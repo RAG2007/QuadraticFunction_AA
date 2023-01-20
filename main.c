@@ -72,18 +72,18 @@ int main() {
 			}
 		}
 		for (int i = -Hwidth; i < Hwidth; i++) {
-			float actualh = getY(i, Hwidth, c, CMax, b, a),
-			      addrealh = getY(i + 1, Hwidth, c, CMax, b, a),
-			      subrealh = getY(i - 1, Hwidth, c, CMax, b, a);
+			float actualh = getY(i, Hwidth, c, CMax, b, a);
+			float addrealh = getY(i + 1, Hwidth, c, CMax, b, a);
+			float subrealh = getY(i - 1, Hwidth, c, CMax, b, a);
 			for (int y = -Hheight; y < Hheight; y++) {
-				float nactualh = (((float)CMax / Hheight) * y),
-				      addnrealh = (((float)CMax / Hheight) * (y + 1)),
-				      subnrealh = (((float)CMax / Hheight) * (y - 1)),
-				      ahna = fabsf(actualh - nactualh),
-				      ahanrh = fabs(actualh - addnrealh),
-				      ahsnrh = fabsf(actualh - subnrealh),
-				      nahsh = fabsf(nactualh - subrealh),
-				      naharh = fabsf(nactualh - addrealh);
+				float nactualh = (((float)CMax / Hheight) * y);
+				float addnrealh = (((float)CMax / Hheight) * (y + 1));
+				float subnrealh = (((float)CMax / Hheight) * (y - 1));
+				float ahna = fabsf(actualh - nactualh);
+				float ahanrh = fabs(actualh - addnrealh);
+				float ahsnrh = fabsf(actualh - subnrealh);
+				float nahsh = fabsf(nactualh - subrealh);
+				float naharh = fabsf(nactualh - addrealh);
 
 				if ((ahna < ahsnrh && ahna < ahanrh) || (ahna < nahsh && ahna < naharh)) {
 					if ((addrealh > actualh && actualh < subrealh) || (addrealh < actualh && actualh > subrealh)) {
